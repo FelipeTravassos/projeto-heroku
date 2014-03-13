@@ -1,0 +1,11 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /		                    controllers.Application.index()
+GET     /meuPlano/:ID/:period       controllers.Application.meuPlano(ID:String, period:String)
+GET     /remove/:ID/:period			controllers.Application.remove(ID:String,  period:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
