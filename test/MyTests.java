@@ -290,4 +290,87 @@ public class MyTests {
 
 		return retorno;
 	}
+	
+	/*
+	 *  << USs DO PROJETO >>
+	 */
+	
+	
+	/*
+	 * US: Nova maneira de usar o fluxograma
+	 * Como aluno, desejo poder manipular as disciplinas, organizá-las e salvá-las da maneira 
+	 * que preferir através de remoção e inserção das mesmas. O sistema inicia com a blocagem 
+	 * padrão do curso e vai sendo moldado de acordo com minha alterações. Prérequisitos são 
+	 * obedecidos quando disciplinas são adicionadas, mas ao movê-las, não. Quando movemos uma 
+	 * disciplina, se ela não ficar antes de todos os seus pré-requisitos, ela deve ficar 
+	 * vermelha na interface. O primeiro período pode ser editado livremente. Cada período tem
+	 * um máximo de créditos, exceto o último. Disciplinas não podem ser removidas.
+	 * 
+	 * Devera ser testado 
+	 *  - mover disciplina e a ao mover nao deve da erro, apenas retornar um boolean
+	 * informando se a modificacao gerou ou nao problemas
+	 *  - Primeiro periodo editavel
+	 *  - Maximo de creditos em todos os periodos, menos no ultimo
+	 */
+	
+	@Test
+	public void testaMoverDisciplina(){
+		//teste base
+		
+		try {
+			assertThat(sistema.moveDisciplina("IC", 1, 2)).isEqualTo(true);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		assertThat(sistema.getTotalCredits(1)).isEqualTo(16);
+		assertThat(sistema.getTotalCredits(2)).isEqualTo(4);
+		
+		//teste envolvento prerequisito
+		
+		try {
+			sistema.addDisciplineInPeriod("Calculo 2", 2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertThat(sistema.moveDisciplina("Calculo 1", 1, 3)).isEqualTo(false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertThat(sistema.getTotalCredits(1)).isEqualTo(12);
+		assertThat(sistema.getTotalCredits(3)).isEqualTo(4);
+		
+	}
+	
+	@Test
+	public void testaPrimeiroPeriodoEditavel(){
+		try {
+			sistema.addDisciplineInPeriod("Discreta", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertThat(sistema.getTotalCredits(1)).isEqualTo(24);
+		sistema.removeDisciplineOfPeriod("Prog 1", 1);
+		assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
+	}
+	
+	@Test
+	public void maxDeCreditosNosPeriodosExcetoNoUltimo(){
+		try {
+			sistema.addDisciplineInPeriod("IC", 8);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 1; i < 8; i++) {
+			assertThat(sistema.getMaxCreditsOfPeriod(i)).isEqualTo(28);			
+		}
+		assertThat(sistema.getMaxCreditsOfPeriod(8)).isEqualTo(0);
+	}
+	
+	
+	
 }

@@ -15,16 +15,14 @@ import BD.LeitorArquivo;
 public class Periodo {
 	
 	private List<Disciplina> disciplinas; 
-	private int max;
-	private int min;
+	private int max = 0;
+	private int min = 0;
 	
 	/**
 	 * Default constructor
 	 */
 	public Periodo() {
 		disciplinas = new ArrayList<Disciplina>();
-		max = 28;
-		min = 0;
 	}
 	
 	/**
@@ -99,7 +97,7 @@ public class Periodo {
 	 * @throws Exception if the total of credits is greater than the maximum value
 	 */
 	public void addDiscipline(Disciplina disciplina) throws Exception {
-		if(getTotalCredits() + disciplina.getCredits() <= max){
+		if(max == 0 || max > 0 && getTotalCredits() + disciplina.getCredits() <= max){
 			disciplinas.add(disciplina);
 		}else{
 			throw new Exception("Não é possível incluir disciplinas de forma a ter mais de 28 créditos alocados no período.");
@@ -151,5 +149,9 @@ public class Periodo {
 			retorno += disciplina.getDifficulty();
 		}
 		return retorno;
+	}
+
+	public int getMaxCredits() {
+		return this.max;
 	}
 }

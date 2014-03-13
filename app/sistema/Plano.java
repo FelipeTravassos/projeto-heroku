@@ -5,6 +5,7 @@
 
 package sistema;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,6 @@ public class Plano {
 	 * @return List of allocated disciplines
 	 */
 	public List<String> getAllocatedDisciplines(int period) {
-		
 		if(listPeriodos.size() < period) return new ArrayList<String>();
 		return this.listPeriodos.get(period -1).getAllocatedDisciplines();
 	}
@@ -71,6 +71,8 @@ public class Plano {
 	public void addDisciplineInPeriod(String ID, int period) throws Exception{
 		while(listPeriodos.size() < period){
 			listPeriodos.add(new Periodo());
+			if(listPeriodos.size()>1)
+				listPeriodos.get(listPeriodos.size()-2).setMax(28);
 		}
 		for (Disciplina disciplina : listDisciplinasDisponiveis) {
 			if(ID.equals(disciplina.getID())){
@@ -90,7 +92,7 @@ public class Plano {
 	 * @param period: period that will remove the discipline
 	 */
 	public void removeDisciplineOfPeriod(String ID, int period) {
-		if(listPeriodos.size() >= period && period > 1){
+		if(listPeriodos.size() >= period && period > 0){
 			listPeriodos.get(period-1).removeDiscipline(ID);
 			removeDisciplineWithThisPrerequisites(ID, period);
 		}
@@ -228,5 +230,42 @@ public class Plano {
 			}
 			removeDisciplineWithThisPrerequisites(ID, ++period);
 		}
+	}
+
+	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod) throws Exception {
+		boolean retorno = true;
+		
+		listPeriodos.get(actualPeriod-1).removeDiscipline(ID);
+		addForcedDisciplineInPeriod(ID, fromPeriod);
+		retorno = verifyConsistency(ID, fromPeriod);
+		
+		return retorno;
+	}
+
+	private boolean verifyConsistency(String ID, int period) {
+		for (int i = 0; i < period; i++) {
+			List<String> disciplinasComPrerequisito = listPeriodos.get(i).getDisciplinesWithPrerequisite(ID);
+			if(disciplinasComPrerequisito.size()>0)
+				return false;
+		}
+		return true;
+	}
+
+	private void addForcedDisciplineInPeriod(String ID, int period) throws Exception {
+		while(listPeriodos.size() < period){
+			listPeriodos.add(new Periodo());
+		}
+		for (Disciplina disciplina : listDisciplinasDisponiveis) {
+			if(ID.equals(disciplina.getID())){
+				this.listPeriodos.get(period -1).addDiscipline(disciplina);
+			}
+		}
+	}
+
+	public int getMaxCreditsOfPeriod(int i) {
+		int PERIODO_INVALIDO = -1;
+		if(listPeriodos.size() < i)
+			return PERIODO_INVALIDO;
+		return listPeriodos.get(i-1).getMaxCredits();
 	}
 }
