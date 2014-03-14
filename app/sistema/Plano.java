@@ -5,11 +5,15 @@
 
 package sistema;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import BD.LeitorArquivo;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import BD.xmlParser;
 
 /**
  * @author FELIPE
@@ -29,7 +33,7 @@ public class Plano {
 		listDisciplinasAlocadas = new ArrayList<Disciplina>();
 		listDisciplinasDisponiveis = new ArrayList<Disciplina>();
 		loadDisciplinasDisponiveis();
-		loadFirstPeriod();
+		loadPeriods();
 	}
 
 	/**
@@ -166,41 +170,54 @@ public class Plano {
 		}
 		return difficulty;
 	}
+
+	/**
+	 * Move the discipline
+	 * @param ID of the discipline
+	 * @param actualPeriod period actual of discipline
+	 * @param fromPeriod period for where it goes discipline
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod) throws Exception {
+		boolean retorno = true;
+		
+		listPeriodos.get(actualPeriod-1).removeDiscipline(ID);
+		addForcedDisciplineInPeriod(ID, fromPeriod);
+		retorno = verifyConsistency(ID, fromPeriod);
+		
+		return retorno;
+	}
+	
+	/**
+	 * get max credits of period
+	 * @param i
+	 * @return max credits of period
+	 */
+	public int getMaxCreditsOfPeriod(int i) {
+		int PERIODO_INVALIDO = -1;
+		if(listPeriodos.size() < i)
+			return PERIODO_INVALIDO;
+		return listPeriodos.get(i-1).getMaxCredits();
+	}
 	
 	/*
 	 * Private methods
 	 */
 	
-	private void loadFirstPeriod() throws Exception{
-		String[] disciplinas = new String[]{"Calculo 1", "IC", "Lab Prog 1", 
-				"Prog 1", "Vetorial"};
-		for (int i = 0; i < disciplinas.length; i++) {
-			addDisciplineInPeriod(disciplinas[i], 1);
+	private void loadPeriods() throws Exception{
+		for (Disciplina disciplina : listDisciplinasDisponiveis) {
+			addDisciplineInPeriod(disciplina.getID(), disciplina.getPeriod());
 		}
 	}
 	
-	private void loadDisciplinasDisponiveis() {
-		LeitorArquivo leitorArq = new LeitorArquivo();
-		List<String[]> disciplinas = leitorArq.read("disciplinas.txt");
-		int NOME_DISCIPLINA = 0;
-		int TOTAL_CREDITOS = 1;
-		int GRAU_DIFICULDADE = 2;
-		int PREREQUISITOS = 3;
-		
-		for (String[] disciplina : disciplinas) {
-			if(disciplina.length ==4){
-				this.listDisciplinasDisponiveis.add
-				(new Disciplina(disciplina[NOME_DISCIPLINA], Integer.parseInt(disciplina[TOTAL_CREDITOS]),
-						Integer.parseInt(disciplina[GRAU_DIFICULDADE]) ,disciplina[PREREQUISITOS].split("#")));				
-			}else{
-				this.listDisciplinasDisponiveis.add
-				(new Disciplina(disciplina[NOME_DISCIPLINA], Integer.parseInt(disciplina[TOTAL_CREDITOS]), 
-						Integer.parseInt(disciplina[GRAU_DIFICULDADE])));
-			}
-		}
+	private void loadDisciplinasDisponiveis() throws ParserConfigurationException, SAXException, IOException {
+		xmlParser parser = new xmlParser();
+		listDisciplinasDisponiveis = parser.getListOfDiscipline();
 	}
 
 	private boolean verifyValidatorPrerequisites(String[] prerequisites, int periodoLimite) {
+		
 		for (int i = 0; i < prerequisites.length; i++) {
 			if(!searchDisciplineInPeriod(prerequisites[i], periodoLimite)){ 
 				return false;
@@ -232,15 +249,6 @@ public class Plano {
 		}
 	}
 
-	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod) throws Exception {
-		boolean retorno = true;
-		
-		listPeriodos.get(actualPeriod-1).removeDiscipline(ID);
-		addForcedDisciplineInPeriod(ID, fromPeriod);
-		retorno = verifyConsistency(ID, fromPeriod);
-		
-		return retorno;
-	}
 
 	private boolean verifyConsistency(String ID, int period) {
 		for (int i = 0; i < period; i++) {
@@ -260,12 +268,5 @@ public class Plano {
 				this.listPeriodos.get(period -1).addDiscipline(disciplina);
 			}
 		}
-	}
-
-	public int getMaxCreditsOfPeriod(int i) {
-		int PERIODO_INVALIDO = -1;
-		if(listPeriodos.size() < i)
-			return PERIODO_INVALIDO;
-		return listPeriodos.get(i-1).getMaxCredits();
 	}
 }

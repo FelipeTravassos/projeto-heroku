@@ -1,0 +1,55 @@
+new String[]{LPT,4, 1});
+Calculo 1 - 4 - 3 - 
+IC - 4 - 1 - 
+Lab Prog 1 - 4 - 2 - 
+Prog 1 - 4 - 2 - 
+Vetorial - 4 - 2 - 
+Calculo 2 - 4 - 3 - Calculo 1
+Discreta - 4 - 1 - 
+Metodologia - 4 - 1 - 
+Prog 2 - 4 - 2 - Prog 1#Lab Prog 1#IC
+Grafos - 2 - 2 - Prog 1#Lab Prog 1
+Fisica classica - 4 - 2 - Calculo 1#Vetorial
+Lab Prog 2 - 4 - 2 - Prog 1#Lab Prog 1#IC
+Probabilidade - 4 - 3 - Calculo 2
+TC - 4 - 1 - IC#Grafos#Discreta
+linear - 4 - 2 - Vetorial
+EDA - 4 - 2 - Grafos#Prog 2#Lab Prog 2
+Fisica moderna - 4 - 3 - Calculo 2#Fisica classica
+GI - 4 - 3 - 
+LEDA - 4 - 2 - Grafos#Prog 2#Lab Prog 2
+Metodos estatisticos - 4 - 2 - linear#Probabilidade
+OAC - 4 - 2 - EDA#LEDA#Fisica moderna
+PLP - 2 - 2 - EDA#LEDA#TC
+Logica - 4 - 2 - TC
+ES 1 - 4 - 2 - Probabilidade#Prog 2#Lab Prog 2
+SI 1 - 4 - 2 - GI
+LOAC - 4 - 2 - EDA#LEDA#Fisica moderna
+Infosoc - 2 - 2 - 
+ATAL - 4 - 2 - EDA#LEDA#Calculo 2#Logica
+Compiladores - 4 - 2 - OAC#LOAC#PLP
+Rede de computadores - 4 - 2 - OAC#LOAC
+BD 1 - 4 - 2 - SI 1
+SI 2 - 4 - 2 - SI 1
+LES - 2 - 2 - ES 1
+Direito e cidadania - 4 - 2 - 
+SO - 4 - 2 - 
+Interconecao de redes de computadores - 2 - 2 - 
+Optativa 1 - 4 - 2 - 
+Laboratorio de interconecao de redes de computadores - 2 - 2 - 
+Optativa 2 - 4 - 2 - 
+Metodos de software numericos - 4 - 2 - 
+Avaliacao de desempenho de de sistemas discretos - 4 - 2 - 
+BD 2 - 4 - 2 - 
+IA - 4 - 2 - 
+Projeto em computacao 1 - 4 - 2 - 
+Optativa 3 - 4 - 2 - 
+Optativa 4 - 4 - 2 - 
+Optativa 5 - 4 - 2 - 
+Optativa 6 - 4 - 2 - 
+Projeto em computacao 2 - 6 - 2 - 
+Optativa 7 - 4 - 2 - 
+Jogos Digitais - 4 - 2 - 
+Didatica 1 - 2 - 2 - 
+Didatica 2 - 2 - 2 - 
+Sociologia industrial - 3 - 2 - 

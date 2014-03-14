@@ -1,11 +1,10 @@
 /**
  * INFORMATION EXPERT: Is the class responsible for storing information such as the name of discipline and total credits
+ *
+ *
  */
 
 package sistema;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author FELIPE
@@ -17,6 +16,7 @@ public class Disciplina {
 	String ID;
 	int dificult;
 	String[] prerequisitos = new String[]{};
+	int period;
 	
 	/**
 	 * Default constructor 
@@ -25,7 +25,7 @@ public class Disciplina {
 	}
 	
 	/**
-	 * Alternate constructor
+	 * Alternate constructor 1
 	 * 
 	 * @param name: name of discipline
 	 * @param credits: credits of discipline
@@ -38,7 +38,7 @@ public class Disciplina {
 	}
 	
 	/**
-	 * Alternate constructor
+	 * Alternate constructor 2
 	 * 
 	 * @param name: name of discipline
 	 * @param credits: credits of discipline
@@ -52,6 +52,10 @@ public class Disciplina {
 		this.prerequisitos = prerequisitos;
 	}
 
+	/*
+	 * Getters and Setters
+	 */
+	
 	/**
 	 * get ID of discipline
 	 * 
@@ -59,6 +63,14 @@ public class Disciplina {
 	 */
 	public String getID(){
 		return this.ID;
+	}
+	
+	/**
+	 * set ID of discipline
+	 * @param ID
+	 */
+	public void setID(String ID){
+		this.ID = ID;
 	}
 
 	/**
@@ -71,20 +83,20 @@ public class Disciplina {
 	}
 
 	/**
+	 * 
+	 * @return: Name of discipline
+	 */
+	public String getName() {
+		return this.name;
+	}
+	
+	/**
 	 * Modifies the credits of discipline
 	 * 
 	 * @param credits: New value for credits
 	 */
 	public void setCredits(int credits) {
 		this.credits = credits;
-	}
-
-	/**
-	 * 
-	 * @return: Name of discipline
-	 */
-	public String getName() {
-		return this.name;
 	}
 
 	/**
@@ -100,8 +112,15 @@ public class Disciplina {
 	 * @return list of prerequisites
 	 */
 	public String[] getPrerequisites() {
-		// TODO Auto-generated method stub
 		return this.prerequisitos;
+	}
+	
+	/**
+	 * set prerequisites for the discipline
+	 * @param prerequisitos
+	 */
+	public void setPrerequisitos(String[] prerequisitos) {
+		this.prerequisitos = prerequisitos;
 	}
 
 	/**
@@ -111,5 +130,28 @@ public class Disciplina {
 	public int getDifficulty() {
 		return dificult;
 	}
+	
+	/**
+	 * set dificult of discipline
+	 * @param dificult
+	 */
+	public void setDificult(int dificult) {
+		this.dificult = dificult;
+	}
 
+	/**
+	 * get period of discipline
+	 * @return
+	 */
+	public int getPeriod() {
+		return period;
+	}
+	
+	/**
+	 * set period of discipline
+	 * @param period
+	 */
+	public void setPeriod(int period) {
+		this.period = period;
+	}
 }
