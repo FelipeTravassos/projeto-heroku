@@ -42,7 +42,7 @@ nome-principal {
 	margin-top:30px;
 	margin-bottom:10px;
 	height: 460px;
-	width: 1520px; 
+	width: 1320px; 
 	display: inherit;
 	border-radius: 10px;
 }
@@ -50,12 +50,13 @@ nome-principal {
 .coluna {
 	background-color: #d8e2eb;
 	float: left;
-	height: 550px;
-	width: 140px;
-	margin-left: 10px;
+	height: 500px;
+	width: 160px;
+	margin-left: 15px;
 	margin-top: 10px;
 	border-radius: 10px;
 	padding-top: 2px;
+	overflow:auto;
 }
 
 #disciplinas {
