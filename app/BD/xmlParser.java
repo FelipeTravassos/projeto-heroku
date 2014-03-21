@@ -34,8 +34,6 @@ public class xmlParser {
 	 * @throws IOException
 	 */
 	private static void uploadDisciplas() throws ParserConfigurationException, SAXException, IOException {
-		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-		
 		Document doc = docment();
 		NodeList nodeList = doc.getElementsByTagName("disciplina");
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -77,7 +75,7 @@ public class xmlParser {
 	 * Cria um parser XML
 	 */
 	private static Document docment() throws ParserConfigurationException, SAXException, IOException {
-		File fXmlFile = new File("disciplinas.xml");
+		File fXmlFile = new File("plano.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(fXmlFile);

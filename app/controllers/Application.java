@@ -9,7 +9,7 @@ import sistema.Plano;
 import views.html.*;
 
 public class Application extends Controller {
-
+	
 	private static Plano plano ;
 	
 	public static Result index() {
@@ -25,17 +25,23 @@ public class Application extends Controller {
 	public static Result meuPlano(String ID, String period){
 		try {
     		Auxiliar aux = new Auxiliar();
-			plano.addDisciplineInPeriod(ID.replace("_", " "), Integer.parseInt(period));
+			plano.addForcedDisciplineInPeriod(ID.replace("_", " "), Integer.parseInt(period));
     		return ok(index.render(plano, aux));
 		} catch (Exception e) {
 			return notFound(e.getMessage());
 		}
 	}
 	
-	public static Result remove(String ID, String period){
+	public static Result mover(String ID, String fromPeriod, String actualPeriod){
    		Auxiliar aux = new Auxiliar();
-		plano.removeDisciplineOfPeriod(ID.replace("_", " "), Integer.parseInt(period));
-   		return ok(index.render(plano, aux));
+		try {
+			plano.moveDisciplina(ID.replace("_", " "), Integer.parseInt(actualPeriod), Integer.parseInt(fromPeriod));
+	   		return ok(index.render(plano, aux));
+		} catch (NumberFormatException e) {
+			return notFound(":'(");
+		} catch (Exception e) {
+			return notFound(":(");
+		}
 	}
 	
 

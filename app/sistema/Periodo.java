@@ -92,13 +92,15 @@ public class Periodo {
 	 * Allocate discipline
 	 * @param IDdisciplina: ID of discipline
 	 * @param period: Period for allocate the discipline
+	 * @return 
 	 * @throws Exception if the total of credits is greater than the maximum value
 	 */
-	public void addDiscipline(Disciplina disciplina) throws Exception {
+	public boolean addDiscipline(Disciplina disciplina){
 		if(max == 0 || max > 0 && getTotalCredits() + disciplina.getCredits() <= max){
 			disciplinas.add(disciplina);
+			return true;
 		}else{
-			throw new Exception("Não é possível incluir disciplinas de forma a ter mais de 28 créditos alocados no período.");
+			return false;
 		}
 	}
 

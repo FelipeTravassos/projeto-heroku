@@ -152,7 +152,7 @@ public class MyTests {
 		assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
 		
 		try {
-			sistema.addDisciplineInPeriod("Prog 1", 1);
+			sistema.addForcedDisciplineInPeriod("Prog 1", 1);
 		} catch (Exception e) {
 		}
 
@@ -162,7 +162,7 @@ public class MyTests {
 	@Test
 	public void maxDeCreditosNosPeriodosExcetoNoUltimo(){
 		try {
-			sistema.addDisciplineInPeriod("IC", 8);
+			sistema.addForcedDisciplineInPeriod("IC", 8);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

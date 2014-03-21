@@ -59,7 +59,7 @@ public class Disciplina {
 	/**
 	 * get ID of discipline
 	 * 
-	 * @return
+	 * @return String with ID
 	 */
 	public String getID(){
 		return this.ID;
@@ -84,7 +84,7 @@ public class Disciplina {
 
 	/**
 	 * 
-	 * @return: Name of discipline
+	 * @return: String with Name of discipline
 	 */
 	public String getName() {
 		return this.name;
@@ -101,7 +101,7 @@ public class Disciplina {
 
 	/**
 	 * 
-	 * @return: Credits of discipline
+	 * @return: Int object with Credits of discipline
 	 */
 	public int getCredits() {
 		return this.credits;
@@ -109,7 +109,7 @@ public class Disciplina {
 
 	/**
 	 * get prerequisites
-	 * @return list of prerequisites
+	 * @return String[]: list of prerequisites
 	 */
 	public String[] getPrerequisites() {
 		return this.prerequisitos;
@@ -125,7 +125,7 @@ public class Disciplina {
 
 	/**
 	 * get difficulty
-	 * @return
+	 * @return int with difficulty
 	 */
 	public int getDifficulty() {
 		return dificult;
@@ -141,7 +141,7 @@ public class Disciplina {
 
 	/**
 	 * get period of discipline
-	 * @return
+	 * @return int with period
 	 */
 	public int getPeriod() {
 		return period;

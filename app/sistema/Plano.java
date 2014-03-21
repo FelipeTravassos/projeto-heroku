@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import BD.BD;
 import BD.xmlParser;
 
 /**
@@ -67,39 +68,12 @@ public class Plano {
 	}
 	
 	/**
-	 * Allocate discipline
-	 * @param IDdisciplina: ID of discipline
-	 * @param period: Period for allocate the discipline
-	 * @throws Exception if the total of credits is greater than the maximum value
-	 */
-	public void addDisciplineInPeriod(String ID, int period) throws Exception{
-		while(listPeriodos.size() < period){
-			listPeriodos.add(new Periodo());
-			if(listPeriodos.size()>1)
-				listPeriodos.get(listPeriodos.size()-2).setMax(28);
-		}
-		for (Disciplina disciplina : listDisciplinasDisponiveis) {
-			if(ID.equals(disciplina.getID())){
-				if(!verifyValidatorPrerequisites(disciplina.getPrerequisites(), period)){
-					throw new Exception("Nao atende pre requisito");
-				}
-				this.listPeriodos.get(period -1).addDiscipline(disciplina);
-				this.listDisciplinasAlocadas.add(disciplina);
-			}
-		}
-		
-	}
-
-	/**
 	 * 
 	 * @param ID: Id of the discipline
 	 * @param period: period that will remove the discipline
 	 */
 	public void removeDisciplineOfPeriod(String ID, int period) {
-		if(listPeriodos.size() >= period && period > 0){
-			listPeriodos.get(period-1).removeDiscipline(ID);
-			removeDisciplineWithThisPrerequisites(ID, period);
-		}
+		listPeriodos.get(period-1).removeDiscipline(ID);
 	}
 	
 	/**
@@ -179,13 +153,11 @@ public class Plano {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod) throws Exception {
+	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod){
 		boolean retorno = true;
-		
-		listPeriodos.get(actualPeriod-1).removeDiscipline(ID);
-		addForcedDisciplineInPeriod(ID, fromPeriod);
+		if(addForcedDisciplineInPeriod(ID, fromPeriod))
+			removeDisciplineOfPeriod(ID, actualPeriod);
 		retorno = verifyConsistency(ID, fromPeriod);
-		
 		return retorno;
 	}
 	
@@ -207,23 +179,14 @@ public class Plano {
 	
 	private void loadPeriods() throws Exception{
 		for (Disciplina disciplina : listDisciplinasDisponiveis) {
-			addDisciplineInPeriod(disciplina.getID(), disciplina.getPeriod());
+			addForcedDisciplineInPeriod(disciplina.getID(), disciplina.getPeriod());
 		}
 	}
 	
 	private void loadDisciplinasDisponiveis() throws ParserConfigurationException, SAXException, IOException {
-		xmlParser parser = new xmlParser();
-		listDisciplinasDisponiveis = parser.getListOfDiscipline();
-	}
-
-	private boolean verifyValidatorPrerequisites(String[] prerequisites, int periodoLimite) {
-		
-		for (int i = 0; i < prerequisites.length; i++) {
-			if(!searchDisciplineInPeriod(prerequisites[i], periodoLimite)){ 
-				return false;
-			}
-		}
-		return true;
+		BD bd = new BD();
+		//xmlParser xml = new xmlParser();
+		listDisciplinasDisponiveis = bd.getDisciplinas();
 	}
 
 	private boolean searchDisciplineInPeriod(String ID, int periodoLimite) {
@@ -239,18 +202,7 @@ public class Plano {
 		return false;
 	}
 	
-	private void removeDisciplineWithThisPrerequisites(String ID, int period) {
-		if(listPeriodos.size() > period){
-			List<String> disciplinasComPrerequisito = listPeriodos.get(period).getDisciplinesWithPrerequisite(ID);
-			for (String disciplina : disciplinasComPrerequisito) {
-				removeDisciplineOfPeriod(disciplina, period+1);
-			}
-			removeDisciplineWithThisPrerequisites(ID, ++period);
-		}
-	}
-
-
-	private boolean verifyConsistency(String ID, int period) {
+	public boolean verifyConsistency(String ID, int period) {
 		for (int i = 0; i < period; i++) {
 			List<String> disciplinasComPrerequisito = listPeriodos.get(i).getDisciplinesWithPrerequisite(ID);
 			if(disciplinasComPrerequisito.size()>0)
@@ -259,14 +211,17 @@ public class Plano {
 		return true;
 	}
 
-	private void addForcedDisciplineInPeriod(String ID, int period) throws Exception {
+	public boolean addForcedDisciplineInPeriod(String ID, int period) {
 		while(listPeriodos.size() < period){
 			listPeriodos.add(new Periodo());
+			if(listPeriodos.size()>1)
+				listPeriodos.get(listPeriodos.size()-2).setMax(28);
 		}
 		for (Disciplina disciplina : listDisciplinasDisponiveis) {
 			if(ID.equals(disciplina.getID())){
-				this.listPeriodos.get(period -1).addDiscipline(disciplina);
+				return this.listPeriodos.get(period -1).addDiscipline(disciplina);
 			}
 		}
+		return false;
 	}
 }
