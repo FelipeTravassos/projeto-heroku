@@ -5,10 +5,12 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.*;
 
+import BD.GerentArq;
 import sistema.Disciplina;
 import sistema.Plano;
 import static org.fest.assertions.Assertions.*;
@@ -16,10 +18,12 @@ import static org.fest.assertions.Assertions.*;
 public class MyTests {
 
 	Plano sistema;		
+	GerentArq arq = new GerentArq();
 	
 	@Before
 	public void setUp(){
 		try {
+			arq.reset();
 			sistema = new Plano();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,6 +71,7 @@ public class MyTests {
         assertThat(28).isEqualTo(sistema.getTotalCredits(2));
 		List<String> disciplinas = sistema.getAllocatedDisciplines(2);
         assertThat(oraculo.size()).isEqualTo(disciplinas.size());
+  
 		for (int i = 0; i < oraculo.size(); i++) {
 	        assertThat(sistema.getNameDiscipline(disciplinas.get(i))).isEqualTo(oraculo.get(i).getName());
 	        assertThat(sistema.getCreditsDiscipline(disciplinas.get(i))).isEqualTo(oraculo.get(i).getCredits());
@@ -142,7 +147,11 @@ public class MyTests {
 		}
 		assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
 		assertThat(sistema.getTotalCredits(8)).isEqualTo(22);
-		
+		try {
+			assertThat(sistema.moveDisciplina("Didatica 2", 1, 9)).isEqualTo(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -171,5 +180,30 @@ public class MyTests {
 			assertThat(sistema.getMaxCreditsOfPeriod(i)).isEqualTo(28);			
 		}
 		assertThat(sistema.getMaxCreditsOfPeriod(8)).isEqualTo(0);
+	}
+	
+	@Test
+	public void testaPersistencia(){
+        assertThat(sistema.getTotalCredits(1)).isEqualTo(24);
+		try {
+			sistema.moveDisciplina("IC", 1, 8);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+        assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
+        
+		sistema.getTotalCredits(1);
+		
+		try {
+			sistema = new Plano();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
+        
+		sistema.getTotalCredits(8);
+		
 	}
 }

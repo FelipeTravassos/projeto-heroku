@@ -13,17 +13,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import BD.BD;
-import BD.xmlParser;
+import BD.GerentArq;
 
 /**
  * @author FELIPE
  */
 public class Plano {
 
-	List<Periodo> listPeriodos;
-	List<Disciplina> listDisciplinasDisponiveis;
-	List<Disciplina> listDisciplinasAlocadas;
+	private GerentArq arq = new GerentArq();
+	private List<Periodo> listPeriodos;
+	private List<Disciplina> listDisciplinasDisponiveis;
 	
 	/**
 	 * Default constructor
@@ -31,10 +30,8 @@ public class Plano {
 	 */
 	public Plano() throws Exception {
 		listPeriodos = new ArrayList<Periodo>();
-		listDisciplinasAlocadas = new ArrayList<Disciplina>();
 		listDisciplinasDisponiveis = new ArrayList<Disciplina>();
-		loadDisciplinasDisponiveis();
-		loadPeriods();
+		update();
 	}
 
 	/**
@@ -150,14 +147,17 @@ public class Plano {
 	 * @param ID of the discipline
 	 * @param actualPeriod period actual of discipline
 	 * @param fromPeriod period for where it goes discipline
-	 * @return
-	 * @throws Exception
+	 * @return 
+	 * @throws Exception 
 	 */
-	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod){
+	public boolean moveDisciplina(String ID, int actualPeriod, int fromPeriod) throws Exception{
 		boolean retorno = true;
 		if(addForcedDisciplineInPeriod(ID, fromPeriod))
 			removeDisciplineOfPeriod(ID, actualPeriod);
+
 		retorno = verifyConsistency(ID, fromPeriod);
+		arq.updatePlanoModificado(ID, fromPeriod);
+		//update();
 		return retorno;
 	}
 	
@@ -177,6 +177,11 @@ public class Plano {
 	 * Private methods
 	 */
 	
+	private void update() throws Exception {
+		loadDisciplinasDisponiveis();
+		loadPeriods();
+	}
+
 	private void loadPeriods() throws Exception{
 		for (Disciplina disciplina : listDisciplinasDisponiveis) {
 			addForcedDisciplineInPeriod(disciplina.getID(), disciplina.getPeriod());
@@ -184,9 +189,7 @@ public class Plano {
 	}
 	
 	private void loadDisciplinasDisponiveis() throws ParserConfigurationException, SAXException, IOException {
-		BD bd = new BD();
-		//xmlParser xml = new xmlParser();
-		listDisciplinasDisponiveis = bd.getDisciplinas();
+		listDisciplinasDisponiveis = arq.getDisciplinasPlanoModificado();
 	}
 
 	private boolean searchDisciplineInPeriod(String ID, int periodoLimite) {

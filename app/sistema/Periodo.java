@@ -154,4 +154,5 @@ public class Periodo {
 	public int getMaxCredits() {
 		return this.max;
 	}
+
 }

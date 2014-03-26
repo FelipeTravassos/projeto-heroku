@@ -52,11 +52,33 @@ nome-principal {
 	float: left;
 	height: 500px;
 	width: 160px;
-	margin-left: 15px;
+	margin-left: 5px;
 	margin-top: 10px;
 	border-radius: 10px;
 	padding-top: 2px;
 	overflow:auto;
+}
+
+.periodo{
+	background-color: #d8e2eb;
+	float: left;
+	height: 590px;
+	width: 170px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	padding-top: 2px;
+}
+
+.informacao{
+	background-color: #d8e2eb;
+	float: left;
+	height: 50px;
+	width: 160px;
+	margin-left: 15px;
+	margin-top: 10px;
+	border-radius: 10px;
+	padding-top: 2px;
 }
 
 #disciplinas {
