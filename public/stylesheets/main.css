@@ -89,6 +89,17 @@ nome-principal {
 	display: inherit;
 }
 
+.disciplinaNotOk {
+	background-color: #FF0000;
+	margin:auto;
+	margin-top:6px;
+	width: 140px;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
 .disciplina {
 	background-color: #FFFFFF;
 	margin:auto;

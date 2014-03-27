@@ -1,3 +1,4 @@
+package models;
 /**
  * Tests for project 
  * 

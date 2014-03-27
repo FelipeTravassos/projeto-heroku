@@ -6,16 +6,26 @@
 
 package sistema;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import play.db.ebean.Model.Finder;
+
 /**
  * @author FELIPE
  */
 public class Disciplina {
 
+	String ID;
 	String name;
 	int credits;
-	String ID;
 	int dificult;
-	String[] prerequisitos = new String[]{};
+    List<String> prerequisitos = new ArrayList<String>();
 	int period;
 	
 	/**
@@ -49,7 +59,9 @@ public class Disciplina {
 		setCredits(credits);
 		this.ID = name;
 		this.dificult = dificult;
-		this.prerequisitos = prerequisitos;
+		for (int i = 0; i < prerequisitos.length; i++) {
+			this.prerequisitos.add(prerequisitos[i]);
+		}
 	}
 
 	/*
@@ -112,7 +124,11 @@ public class Disciplina {
 	 * @return String[]: list of prerequisites
 	 */
 	public String[] getPrerequisites() {
-		return this.prerequisitos;
+		String[] retorno = new String[prerequisitos.size()];
+		for (int i = 0; i < retorno.length; i++) {
+			retorno[i] = prerequisitos.get(i);
+		}
+		return retorno;
 	}
 	
 	/**
@@ -120,7 +136,10 @@ public class Disciplina {
 	 * @param prerequisitos
 	 */
 	public void setPrerequisitos(String[] prerequisitos) {
-		this.prerequisitos = prerequisitos;
+		this.prerequisitos = new ArrayList<String>();
+		for (int i = 0; i < prerequisitos.length; i++) {
+			this.prerequisitos.add(prerequisitos[i]);
+		}
 	}
 
 	/**
@@ -154,4 +173,8 @@ public class Disciplina {
 	public void setPeriod(int period) {
 		this.period = period;
 	}
+	
+	public static Finder<String,Disciplina> find = new Finder<String,Disciplina>(
+	        String.class, Disciplina.class
+	    );
 }

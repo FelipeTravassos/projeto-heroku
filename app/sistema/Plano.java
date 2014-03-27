@@ -33,18 +33,6 @@ public class Plano {
 		listDisciplinasDisponiveis = new ArrayList<Disciplina>();
 		update();
 	}
-
-	/**
-	 * get periods
-	 * @return List<Integer> with numbers of periods
-	 */
-	public List<Integer> getPeriodos(){
-		List<Integer> periodos = new ArrayList<Integer>();
-		for (int i = 1; i <= listPeriodos.size(); i++) {
-			periodos.add(i);
-		}
-		return periodos;
-	}
 	
 	/**
 	 * get total credits
@@ -74,15 +62,11 @@ public class Plano {
 	}
 	
 	/**
-	 * get All Disciplines
-	 * @return List with ID of all disciplines
+	 * Get Total Periods
+	 * @return int: total periods in course
 	 */
-	public List<String> getAllDisciplines(){
-		List<String> retorno= new ArrayList<String>();
-		for (Disciplina disciplina : listDisciplinasDisponiveis) {
-			retorno.add(disciplina.getID());
-		}
-		return retorno;
+	public int getTotalPeriods(){
+		return listPeriodos.size();
 	}
 
 	/**
@@ -190,19 +174,6 @@ public class Plano {
 	
 	private void loadDisciplinasDisponiveis() throws ParserConfigurationException, SAXException, IOException {
 		listDisciplinasDisponiveis = arq.getDisciplinasPlanoModificado();
-	}
-
-	private boolean searchDisciplineInPeriod(String ID, int periodoLimite) {
-		for (int i = 0; i < periodoLimite -1; i++) {
-			List<String> disciplinas = listPeriodos.get(i).getAllocatedDisciplines();
-			for (int j = 0; j < disciplinas.size(); j++) {
-				if(disciplinas.get(j).equals(ID)){
-					return true;
-				}
-			}
-			
-		}
-		return false;
 	}
 	
 	public boolean verifyConsistency(String ID, int period) {
