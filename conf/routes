@@ -3,7 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /		                    			controllers.Application.index()
+GET     /		                    			controllers.Application.login()
+GET     /index	                    			controllers.Application.index()
 GET     /meuPlano/:ID/:period       			controllers.Application.meuPlano(ID:String, period:String)
 GET     /mover/:ID/:period/:actualPeriod		controllers.Application.mover(ID:String,  period:String, actualPeriod:String)
 

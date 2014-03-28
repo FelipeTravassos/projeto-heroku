@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import sistema.Disciplina;
@@ -24,6 +25,7 @@ public class GerentArq {
 	final int ID = 0, NOME = 1, CREDITOS = 3, DIFICULDADE = 2, PREREQUISITOS = 5, PERIODO = 4;
 	final String ARQ_DEFAULT = "files//plano.txt";
 	final String ARQ_MODIFICADO = "files//planoModificado.txt";
+	final String USERS = "files//users.txt";
 	final String SEPARADOR = "	";
 	
 	public List<Disciplina> getDisciplinasDefault(){
@@ -36,6 +38,78 @@ public class GerentArq {
 		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 		lerArq(ARQ_MODIFICADO, disciplinas);
 		return disciplinas;
+	}
+	
+	public HashMap<String, String> getDisciplinasOfUser(String email, String password){
+		HashMap<String, String> disciplinas = new HashMap<String, String>();
+		String[] discUser = getUser(email, password)[3].split(",");
+		for (int i = 0; i < discUser.length; i++) {
+			disciplinas.put(discUser[i].split(" - ")[0], discUser[i].split(" - ")[1]);
+		}
+		return disciplinas;
+	}
+	
+	public void addUser(String email, String password, String nome, String disc){
+		if(!isUser(email)){
+			FileWriter fw;	
+			try {
+				String add = email+"	"+password+"	"+nome+"	"+disc+"\n";
+				fw = new FileWriter(USERS, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(add);
+				bw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private boolean isUser(String email){
+		FileReader fileReader;
+		try {
+			fileReader = new FileReader(USERS);
+			BufferedReader reader = new BufferedReader(fileReader);
+			String data = null;
+			while((data = reader.readLine()) != null){
+				if(data.split("	")[0].equals(email)){
+					fileReader.close();
+					reader.close();
+					return true;
+				}
+			}
+			fileReader.close();
+			reader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	private String[] getUser(String email, String password){ 
+		String[] retorno = null;
+		FileReader fileReader;
+		try {
+			fileReader = new FileReader(USERS);
+			BufferedReader reader = new BufferedReader(fileReader);
+			String data = null;
+			while((data = reader.readLine()) != null){
+		 		//Email	passoword nome plano
+				if(data.split("	")[0].equals(email) && data.split("	")[1].equals(password)){
+					retorno = data.split("	");
+					break;
+				}
+			}
+			fileReader.close();
+			reader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return retorno;
 	}
 	
 	public void reset(){

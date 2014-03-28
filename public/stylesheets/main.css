@@ -70,6 +70,27 @@ nome-principal {
 	padding-top: 2px;
 }
 
+.login{
+	background-color: #7A67EE;
+	float: center;
+	height: 240px;
+	width: 250px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	padding-top: 2px;
+}
+
+.botaoLogin{
+	background-color: #473C8B;
+	float: center;
+	height: 30px;
+	width: 70px;
+	margin-top: 10px;
+	border-radius: 10px;
+	padding-top: 2px;
+}
+
 .informacao{
 	background-color: #d8e2eb;
 	float: left;

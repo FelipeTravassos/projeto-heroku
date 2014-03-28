@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plano>
+	<disciplina nome="LPT" id="LPT">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Calculo 1" id="Calculo 1">
+		<dificuldade>3</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="IC" id="IC">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Lab Prog 1" id="Lab Prog 1">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	 
+	<disciplina nome="Prog 1" id="Prog 1">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+
+	<disciplina nome="Vetorial" id="Vetorial">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>1</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Calculo 2" id="Calculo 2">
+		<dificuldade>3</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos>Calculo 1</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Discreta" id="Discreta">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Metodologia" id="Metodologia">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Prog 2" id="Prog 2">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos>Prog 1;Lab Prog 1;IC</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Grafos" id="Grafos">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>2</periodo>
+		<prerequisitos>Prog 1;Lab Prog 1</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Fisica classica" id="Fisica classica">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos>Calculo 1;Vetorial</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Lab Prog 2" id="Lab Prog 2">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>2</periodo>
+		<prerequisitos>Prog 1;Lab Prog 1;IC</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Probabilidade" id="Probabilidade">
+		<dificuldade>3</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>Calculo 2</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="TC" id="TC">
+		<dificuldade>1</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>IC;Grafos;Discreta</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="linear" id="linear">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>Vetorial</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="EDA" id="EDA">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>Grafos;Prog 2;Lab Prog 2</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Fisica moderna" id="Fisica moderna">
+		<dificuldade>3</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>Calculo 2;Fisica classica</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="GI" id="GI">
+		<dificuldade>3</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="LEDA" id="LEDA">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>3</periodo>
+		<prerequisitos>Grafos;Prog 2;Lab Prog 2</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Metodos estatisticos" id="Metodos estatisticos">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>linear;Probabilidade</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="OAC" id="OAC">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>EDA;LEDA;Fisica moderna</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="PLP" id="PLP">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>EDA;LEDA;TC</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Logica" id="Logica">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>TC</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="ES" id="ES">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>Probabilidade;Prog 2;Lab Prog 2</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="SI 1" id="SI 1">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>GI</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="LOAC" id="LOAC">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>4</periodo>
+		<prerequisitos>EDA;LEDA;Fisica moderna</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Infosoc" id="Infosoc">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="ATAL" id="ATAL">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>EDA;LEDA;Calculo 2;Logica</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Compiladores" id="Compiladores">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>OAC;LOAC;PLP</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Rede de computadores" id="Rede de computadores">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>OAC;LOAC</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="BD 1" id="BD 1">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>SI 1</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="SI 2" id="SI 2">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>SI 1</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="LES" id="LES">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>5</periodo>
+		<prerequisitos>ES</prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Direito e cidadania" id="Direito e cidadania">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="SO" id="SO">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Interconecao de redes de computadores" id="Interconecao de redes de computadores">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 1" id="Optativa 1">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Laboratorio de interconecao de redes de computadores" id="Laboratorio de interconecao de redes de computadores">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 2" id="Optativa 2">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Metodos de software numericos" id="Metodos de software numericos">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Avaliacao de desempenho de de sistemas discretos" id="Avaliacao de desempenho de de sistemas discretos">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="BD 2" id="BD 2">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="IA" id="IA">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>6</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Projeto em computacao 1" id="Projeto em computacao 1">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 3" id="Optativa 3">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 4" id="Optativa 4">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 5" id="Optativa 5">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 6" id="Optativa 6">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>7</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Projeto em computacao 2" id="Projeto em computacao 2">
+		<dificuldade>2</dificuldade>
+		<creditos>6</creditos>
+		<periodo>8</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Optativa 7" id="Optativa 7">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>8</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Jogos Digitais" id="Jogos Digitais">
+		<dificuldade>2</dificuldade>
+		<creditos>4</creditos>
+		<periodo>8</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Didatica 1" id="Didatica 1">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>2</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Didatica 2" id="Didatica 2">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>8</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+	<disciplina nome="Sociologia industrial" id="Sociologia industrial">
+		<dificuldade>2</dificuldade>
+		<creditos>2</creditos>
+		<periodo>8</periodo>
+		<prerequisitos></prerequisitos>
+	</disciplina>
+	
+</plano>

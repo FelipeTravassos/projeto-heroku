@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import play.*;
 import play.mvc.*;
 import sistema.Plano;
@@ -42,6 +39,10 @@ public class Application extends Controller {
 		} catch (Exception e) {
 			return notFound(":(");
 		}
+	}
+	
+	public static Result login(){
+		return ok(login.render());
 	}
 	
 
