@@ -23,14 +23,16 @@ public class Plano {
 	private GerentArq arq = new GerentArq();
 	private List<Periodo> listPeriodos;
 	private List<Disciplina> listDisciplinasDisponiveis;
+	private String userID;
 	
 	/**
 	 * Default constructor
 	 * @throws Exception if the total of credits is greater than the maximum value
 	 */
-	public Plano() throws Exception {
+	public Plano(String userID) throws Exception {
 		listPeriodos = new ArrayList<Periodo>();
 		listDisciplinasDisponiveis = new ArrayList<Disciplina>();
+		this.userID = userID;
 		update();
 	}
 	
@@ -53,7 +55,7 @@ public class Plano {
 	}
 	
 	/**
-	 * 
+	 * Remove discipline of period
 	 * @param ID: Id of the discipline
 	 * @param period: period that will remove the discipline
 	 */
@@ -70,7 +72,7 @@ public class Plano {
 	}
 
 	/**
-	 * 
+	 * Get name of discipline
 	 * @param string: ID of discipline
 	 * @return Name of discipline
 	 */
@@ -85,7 +87,7 @@ public class Plano {
 	}
 
 	/**
-	 * 
+	 * Get total credits of discipline
 	 * @param string: ID of discipline
 	 * @return credits of discipline
 	 */
@@ -138,9 +140,8 @@ public class Plano {
 		boolean retorno = true;
 		if(addForcedDisciplineInPeriod(ID, fromPeriod))
 			removeDisciplineOfPeriod(ID, actualPeriod);
-
 		retorno = verifyConsistency(ID, fromPeriod);
-		arq.updatePlanoModificado(ID, fromPeriod);
+		arq.updatePlanoUser(this.userID, ID, fromPeriod);
 		//update();
 		return retorno;
 	}
@@ -150,30 +151,32 @@ public class Plano {
 	 * @param i
 	 * @return max credits of period
 	 */
-	public int getMaxCreditsOfPeriod(int i) {
+	public int getMaxCreditsOfPeriod(int period) {
 		int PERIODO_INVALIDO = -1;
-		if(listPeriodos.size() < i)
+		if(listPeriodos.size() < period)
 			return PERIODO_INVALIDO;
-		return listPeriodos.get(i-1).getMaxCredits();
+		return listPeriodos.get(period-1).getMaxCredits();
 	}
 	
 	/*
 	 * Private methods
 	 */
 	
-	private void update() throws Exception {
+	public void update() throws Exception {
 		loadDisciplinasDisponiveis();
 		loadPeriods();
 	}
 
 	private void loadPeriods() throws Exception{
+		listPeriodos = new ArrayList<Periodo>();
 		for (Disciplina disciplina : listDisciplinasDisponiveis) {
 			addForcedDisciplineInPeriod(disciplina.getID(), disciplina.getPeriod());
 		}
 	}
 	
 	private void loadDisciplinasDisponiveis() throws ParserConfigurationException, SAXException, IOException {
-		listDisciplinasDisponiveis = arq.getDisciplinasPlanoModificado();
+		listDisciplinasDisponiveis = new ArrayList<Disciplina>();
+		listDisciplinasDisponiveis = arq.getDisciplinesOfPlan(this.userID);
 	}
 	
 	public boolean verifyConsistency(String ID, int period) {
@@ -185,6 +188,12 @@ public class Plano {
 		return true;
 	}
 
+	/**
+	 * Add discipline in period, without verify prerequisites 
+	 * @param ID: String with ID of discipline
+	 * @param period: int period of discipline
+	 * @return
+	 */
 	public boolean addForcedDisciplineInPeriod(String ID, int period) {
 		while(listPeriodos.size() < period){
 			listPeriodos.add(new Periodo());

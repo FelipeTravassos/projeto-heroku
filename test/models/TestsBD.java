@@ -8,12 +8,15 @@ import java.util.List;
 
 import org.junit.Test;
 
+import sistema.Disciplina;
+import sistema.Login;
 import BD.GerentArq;
-import sistema.User;
 
 public class TestsBD {
 
 	GerentArq bd = new GerentArq();
+	
+	
 	
 	@Test
 	public void testNewUser() {
@@ -21,11 +24,16 @@ public class TestsBD {
 		String password = "1234";
 		String nome = "Felipe";
 		
-		bd.addUser(email, password, nome, "disc A - 1");
+		bd.addUser(email, password, nome);
 		
-		HashMap<String, String> disciplinesOfUser = bd.getDisciplinasOfUser(email, password);
-        assertThat(disciplinesOfUser.size()).isEqualTo(1);
-        assertThat(disciplinesOfUser.get("disc A")).isEqualTo("1");
+		List<Disciplina> disciplinesOfUser = bd.getDisciplinesOfPlan(email);
+        assertThat(disciplinesOfUser.size()).isEqualTo(55);
+	}
+	
+	@Test
+	public void testLogin(){
+		assertThat((new Login()).login("blabla", ":p")).isEqualTo(null);
+		assertThat((new Login()).login("felipe.travassos@ccc.ufcg.edu.br", "1234").getName()).isEqualTo("Felipe");
 	}
 
 }

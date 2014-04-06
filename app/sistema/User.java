@@ -1,98 +1,115 @@
 package sistema;
 
-import java.util.HashMap;
-import java.util.Set;
-
-import BD.BD;
+import BD.GerentArq;
 
 public class User {
 	
 	/*
 	 * Variables
 	 */
-	
-	private BD 							db = new BD();
-	private String 						email;
-	private String 						password;
-	private String 						name;
-	private HashMap<String, String> 	plano = new HashMap<String, String>();
-	
-	/*
-	 * Constructs
-	 */
-	
-	public User(String email, String password, String name) {
+	private GerentArq 	db 			= new GerentArq();
+	private String 		email;
+	private String 		password;
+	private String 		name;
+	private Plano 		plano;
+
+	public User(String email, String password, String name) throws Exception {
+		this.plano = new Plano(email);
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		loadPlano();
 	}
-	
-	public User(String email, String password, String name, HashMap<String, String> plano) {
-		this.email    = email;
-		this.password = password;
-		this.name     = name;
-		this.plano    = plano;
-	}
-	
+
+	/**
+	 * Add new user in system
+	 * @throws Exception: Error if the user already exists
+	 */
 	public void saveUser() throws Exception {
-		if(!db.addUser(email, password, name, getPlanoForSave())){
+		if(!db.addUser(email, password, name)){
 			throw new Exception("Usuario ja cadastrado anteriormente");
 		}
 	}
-	
-	private String getPlanoForSave() {
-		String retorno = "";
-		Set keys = plano.keySet();  
-		int i =0;
-		for (Object key : keys) {
-			retorno+= key.toString()+" - "+plano.get(key);
-			if(i++ < plano.size() - 1)
-				retorno+=",";
-		}
-		return retorno;
+
+	/**
+	 * Update plan of user
+	 * @param disciplineID: String with ID of discipline for update
+	 * @param fromPeriod: int with periods where does the discipline
+	 */
+	public void updatePlan(String disciplineID, int fromPeriod){
+		db.updatePlanoUser(this.email, disciplineID, fromPeriod);
 	}
 
-	/*
-	 * Private methods
+	/**
+	 * @return String with email of user
 	 */
-	
-	private void loadPlano(){
-		setPlano(db.getPlanoOfUser(email));
-	}
-	
-	/*
-	 * Getters and setters
-	 */
-	
 	public String getEmail() {
 		return email;
 	}
+	
+	/**
+	 * Set email
+	 * @param email: String
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	/**
+	 * @return String with password of user
+	 */
 	public String getPassword() {
 		return password;
 	}
+	
+	/**
+	 * Set password
+	 * @param password: String
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	/**
+	 * @return String with name of user
+	 */
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Set name of user
+	 * @param name:String
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	public HashMap<String, String> getPlano() {
+
+	/**
+	 * @return String with plan of user
+	 */
+	public Plano getPlano() {
 		return plano;
 	}
-	public void setPlano(HashMap<String, String> plano) {
+	
+	/**
+	 * Set plan of user
+	 * @param plano: Plano
+	 */
+	public void setPlano(Plano plano) {
 		this.plano = plano;
 	}
+	
+	/**
+	 * @return String with ID of user
+	 */
 	public String getId(){
 		return getEmail();
 	}
-	
 
-
+	/**
+	 * Reset user plan to be equal to default plan
+	 */
+	public void resetPlan() {
+		db.reset(getId());
+	}
 }

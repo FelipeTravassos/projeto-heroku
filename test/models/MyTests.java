@@ -14,18 +14,22 @@ import org.junit.*;
 import BD.GerentArq;
 import sistema.Disciplina;
 import sistema.Plano;
+import sistema.Sistema;
+import sistema.User;
 import static org.fest.assertions.Assertions.*;
 
 public class MyTests {
 
-	Plano sistema;		
+	Sistema sistema;		
 	GerentArq arq = new GerentArq();
-	
+
 	@Before
 	public void setUp(){
 		try {
-			arq.reset();
-			sistema = new Plano();
+			arq.addUser("admin@email.com", "admin", "admin");
+			sistema = new Sistema();
+			sistema.login("admin@email.com", "admin");
+			sistema.resetPlan();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -197,14 +201,12 @@ public class MyTests {
 		sistema.getTotalCredits(1);
 		
 		try {
-			sistema = new Plano();
+			sistema = new Sistema();
+			sistema.login("admin@email.com", "admin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
         assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
-        
-		sistema.getTotalCredits(8);
-		
 	}
 }

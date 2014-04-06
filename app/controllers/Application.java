@@ -2,6 +2,7 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
+import sistema.Login;
 import sistema.Plano;
 import views.html.*;
 
@@ -42,7 +43,7 @@ public class Application extends Controller {
 	}
 	
 	public static Result login(){
-		return ok(login.render());
+		return ok(login.render(new Login()));
 	}
 	
 

@@ -1,0 +1,55 @@
+LPT	LPT	1	4	1		
+Calculo 1	Calculo 1	3	4	1		
+IC	IC	1	4	8		
+Lab Prog 1	Lab Prog 1	2	4	1		
+Prog 1	Prog 1	1	4	1		
+Vetorial	Vetorial	2	4	1		
+Calculo 2	Calculo 2	3	4	2	{Calculo 1}	
+Discreta	Discreta	1	4	2		
+Metodologia	Metodologia	1	4	2		
+Prog 2	Prog 2	2	4	2	{Prog 1Lab Prog 1IC}	
+Grafos	Grafos	2	2	2	{Prog 1Lab Prog 1}	
+Fisica classica	Fisica classica	2	4	2	{Calculo 1Vetorial}	
+Lab Prog 2	Lab Prog 2	2	4	2	{Prog 1Lab Prog 1IC}	
+Probabilade	Probabilade	3	4	3	{Calculo 2}	
+TC	TC	1	4	3	{ICGrafosDiscreta}	
+linear	linear	2	4	3	{Vetorial}	
+EDA	EDA	2	4	3	{GrafosProg 2Lab Prog 2}	
+Fisica moderna	Fisica moderna	3	4	3	{Calculo 2Fisica classica}	
+GI	GI	3	4	3		
+LEDA	LEDA	2	4	3	{GrafosProg 2Lab Prog 2}	
+Metodos estatisticos	Metodos estatisticos	2	4	4	{linearProbabilade}	
+OAC	OAC	2	4	4	{EDALEDAFisica moderna}	
+PLP	PLP	2	2	4	{EDALEDATC}	
+Logica	Logica	2	4	4	{TC}	
+ES	ES	2	4	4	{ProbabiladeProg 2Lab Prog 2}	
+SI 1	SI 1	2	4	4	{GI}	
+LOAC	LOAC	2	4	4	{EDALEDAFisica moderna}	
+Infosoc	Infosoc	2	4	5		
+ATAL	ATAL	2	4	5	{EDALEDACalculo 2Logica}	
+Compiladores	Compiladores	2	4	5	{OACLOACPLP}	
+Rede de computadores	Rede de computadores	2	4	5	{OACLOAC}	
+BD 1	BD 1	2	4	5	{SI 1}	
+SI 2	SI 2	2	4	5	{SI 1}	
+LES	LES	2	2	5	{ES}	
+Direito e cadania	Direito e cadania	2	4	6		
+SO	SO	2	4	6		
+Interconecao de redes de computadores	Interconecao de redes de computadores	2	2	6		
+Optativa 1	Optativa 1	2	4	6		
+Laboratorio de interconecao de redes de computadores	Laboratorio de interconecao de redes de computadores	2	2	6		
+Optativa 2	Optativa 2	2	4	6		
+Metodos de software numericos	Metodos de software numericos	2	4	7		
+Avaliacao de desempenho de de sistemas discretos	Avaliacao de desempenho de de sistemas discretos	2	4	7		
+BD 2	BD 2	2	4	6		
+IA	IA	2	4	6		
+Projeto em computacao 1	Projeto em computacao 1	2	4	7		
+Optativa 3	Optativa 3	2	4	7		
+Optativa 4	Optativa 4	2	4	7		
+Optativa 5	Optativa 5	2	4	7		
+Optativa 6	Optativa 6	2	4	7		
+Projeto em computacao 2	Projeto em computacao 2	2	6	8		
+Optativa 7	Optativa 7	2	4	8		
+Jogos Digitais	Jogos Digitais	2	4	8		
+Didatica 1	Didatica 1	2	2	2		
+Didatica 2	Didatica 2	2	2	8		
+Sociologia industrial	Sociologia industrial	2	2	8		
