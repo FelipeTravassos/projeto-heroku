@@ -3,16 +3,16 @@ package controllers;
 import play.*;
 import play.mvc.*;
 import sistema.Login;
-import sistema.Plano;
+import sistema.Sistema;
 import views.html.*;
 
 public class Application extends Controller {
 	
-	private static Plano plano ;
+	private static Sistema sistema ;
 	
 	public static Result index() {
 		try {
-			plano = new Plano();
+			sistema = new Sistema();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -21,20 +21,30 @@ public class Application extends Controller {
     }
 	
 	public static Result meuPlano(String ID, String period){
+		Auxiliar aux = new Auxiliar();
 		try {
-    		Auxiliar aux = new Auxiliar();
-			plano.addForcedDisciplineInPeriod(ID.replace("_", " "), Integer.parseInt(period));
-    		return ok(index.render(plano, aux));
+    		sistema.addForcedDisciplineInPeriod(ID.replace("_", " "), Integer.parseInt(period));
+    		return ok(index.render(sistema, aux));
 		} catch (Exception e) {
 			return notFound(e.getMessage());
 		}
 	}
 	
-	public static Result mover(String ID, String fromPeriod, String actualPeriod){
-   		Auxiliar aux = new Auxiliar();
+	public static Result login(String email, String password){
+		Auxiliar aux = new Auxiliar();
 		try {
-			plano.moveDisciplina(ID.replace("_", " "), Integer.parseInt(actualPeriod), Integer.parseInt(fromPeriod));
-	   		return ok(index.render(plano, aux));
+			sistema.login(email, password);
+	   		return ok(index.render(sistema, aux));
+		} catch(Exception e){
+			return notFound(":'( - "+e.getMessage());
+		}
+	}
+	
+	public static Result mover(String ID, String fromPeriod, String actualPeriod){
+		Auxiliar aux = new Auxiliar();
+		try {
+			sistema.moveDisciplina(ID.replace("_", " "), Integer.parseInt(actualPeriod), Integer.parseInt(fromPeriod));
+	   		return ok(index.render(sistema, aux));
 		} catch (NumberFormatException e) {
 			return notFound(":'(");
 		} catch (Exception e) {
@@ -42,8 +52,9 @@ public class Application extends Controller {
 		}
 	}
 	
-	public static Result login(){
-		return ok(login.render(new Login()));
+	public static Result start(){
+		Auxiliar aux = new Auxiliar();
+		return ok(login.render(sistema, aux));
 	}
 	
 

@@ -3,9 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /		                    			controllers.Application.login()
+GET     /		                    			controllers.Application.start()
 GET     /index	                    			controllers.Application.index()
 GET     /meuPlano/:ID/:period       			controllers.Application.meuPlano(ID:String, period:String)
+GET     /login/:email/:password       			controllers.Application.login(email:String, password:String)
 GET     /mover/:ID/:period/:actualPeriod		controllers.Application.mover(ID:String,  period:String, actualPeriod:String)
 
 # Map static resources from the /public folder to the /assets URL path

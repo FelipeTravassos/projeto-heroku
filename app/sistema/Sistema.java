@@ -40,6 +40,18 @@ public class Sistema {
 		}
 	}
 
+	public boolean verifyConsistency(String ID, int period) {
+		return plan.verifyConsistency(ID, period);
+	}
+	
+	/**
+	 * Get Total Periods
+	 * @return int: total periods in course
+	 */
+	public int getTotalPeriods(){
+		return plan.getTotalPeriods();
+	}
+	
 	/**
 	 * get total credits
 	 * @return total credits for the current period

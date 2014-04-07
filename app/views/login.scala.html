@@ -1,4 +1,4 @@
-@(login: sistema.Login)
+@(sist: sistema.Sistema, auxiliar: controllers.Auxiliar)
 
 @import helper._ 
 
@@ -20,18 +20,26 @@
 						E-mail: 
 					</font>
 				</body></br>
-				<input type="text" name="email"></input>
+				<input id="emailID" type="text" name="email"></input>
 				</br></br>
 				<body>
 					<font font="Arial" color="white" size="5">
 						Password: 
 					</font>
 				</body></br>
-				<input type="password" name="password"></input>
+				<input id="passwordID" type="password" name="password"></input>
 				</br></br>
-				<button class="botaoLogin" type="button">
+				<button class="botaoLogin" type="button" onclick="hack()">
+					<script type="text/javascript">
+						  function hack()
+						  {
+							email = document.getElementById("emailID").value;
+							password = document.getElementById("passwordID").value;
+							location.href = ("/login/"+email+"/"+password);
+						  }
+					</script>
 					<font font="Arial" color="white" size="2">
-						Login
+							Login
 					</font>
 				</button>
 				<button class="botaoLogin" type="button">
