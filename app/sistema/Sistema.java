@@ -2,10 +2,26 @@ package sistema;
 
 import java.util.List;
 
+import BD.GerentArq;
+
 public class Sistema {
 	User user = null;
 	Plano plan = null;
 	Login login = new Login();
+	GerentArq arq = new GerentArq();
+	
+	public void removeUser(String ID, String password) {
+		arq.removeUser(ID, password);
+	}
+	
+	public boolean createUser(String email, String password, String name){
+		try {
+			return arq.addUser(email, password, name);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	public void login(String email, String password) throws Exception{
 		user = login.login(email, password);

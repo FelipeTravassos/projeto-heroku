@@ -13,6 +13,7 @@ import org.junit.*;
 
 import BD.GerentArq;
 import sistema.Disciplina;
+import sistema.Login;
 import sistema.Plano;
 import sistema.Sistema;
 import sistema.User;
@@ -208,5 +209,19 @@ public class MyTests {
 		}
 
         assertThat(sistema.getTotalCredits(1)).isEqualTo(20);
+	}
+	
+	@Test
+	public void testaCriacaoDeUsuario(){
+		sistema = new Sistema();
+        assertThat(sistema.createUser("admin@email.com", "admin", "admin")).isEqualTo(false);
+        assertThat(sistema.createUser("admin2@email.com", "admin", "admin")).isEqualTo(true);
+        sistema.removeUser("admin2@email.com","admin");
+	}
+	
+	@Test
+	public void testLogin(){
+		assertThat((new Login()).login("blabla", ":p")).isEqualTo(null);
+		assertThat((new Login()).login("felipe.travassos@ccc.ufcg.edu.br", "1234").getName()).isEqualTo("Felipe");
 	}
 }

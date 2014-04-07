@@ -56,8 +56,9 @@ public class GerentArq {
 	 * @param password
 	 * @param nome
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean addUser(String email, String password, String nome){
+	public boolean addUser(String email, String password, String nome) throws Exception{
 		boolean retorno = false;
 		if(!isUser(email)){
 			FileWriter fw;	
@@ -309,10 +310,74 @@ public class GerentArq {
 		}
 	}
 
-	public void removeUser(String id2, String password) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Remove user
+	 * @param id2
+	 * @param password
+	 */
+	public void removeUser(String id, String password) {
+		List<User> users = getUsers();
+		FileWriter fw;
+		try {
+			String text = "";
+			int i;
+			for (i = 0; i < users.size()-1; i++) {
+				if(!users.get(i).getEmail().equals(id)){
+					text += users.get(i).getEmail()+SEPARADOR
+							+users.get(i).getPassword()+SEPARADOR
+							+users.get(i).getName()+SEPARADOR
+							+getPathForSavePlan(users.get(i).getEmail())
+							+"\n";
+				}
+			}
+			if(!users.get(i).getEmail().equals(id)){
+				text += users.get(i).getEmail()+SEPARADOR
+					+users.get(i).getPassword()+SEPARADOR
+					+users.get(i).getName()+SEPARADOR
+					+getPathForSavePlan(users.get(i).getEmail());
+			}
+			
+			fw = new FileWriter(USERS, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(text);
+			bw.close();
+			fw.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	
+	/**
+	 * return list of user
+	 * @return List<User>
+	 */
+	private List<User> getUsers() {
+		List<User> retorno = new ArrayList<User>();
+		FileReader fileReader;
+		try {
+			fileReader = new FileReader(this.USERS);
+			BufferedReader reader = new BufferedReader(fileReader);
+			String data = null;
+			while((data = reader.readLine()) != null){
+				String[] dados = data.split("	");
+				User user = null;
+				if(dados.length > 0){
+					try {
+						user = new User(dados[0], dados[1], dados[2]);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				retorno.add(user);
+			}
+			fileReader.close();
+			reader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return retorno;
+	}
 }
