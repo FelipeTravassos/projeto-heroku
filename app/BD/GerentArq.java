@@ -66,10 +66,11 @@ public class GerentArq {
 				String add = email+SEPARADOR+
 						password+SEPARADOR+
 						nome+SEPARADOR+
-						getPathForSavePlan(email)+"\n";
+						getPathForSavePlan(email);
 				fw = new FileWriter(USERS, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(add);
+				bw.newLine();
 				bw.close();
 				fw.close();
 				reset(email);

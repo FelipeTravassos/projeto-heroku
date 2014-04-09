@@ -23,14 +23,17 @@ public class Sistema {
 		return false;
 	}
 	
-	public void login(String email, String password) throws Exception{
+	public void login(String email, String password) {
 		user = login.login(email, password);
 		if(user == null){
-			throw new Exception("Usuario nao cadastrado");
 		}
 		plan = user.getPlano();
 	}
 
+	public String getNameUser(){
+		return user.getName();
+	}
+	
 	public void resetPlan() {
 		user.resetPlan();
 		try {

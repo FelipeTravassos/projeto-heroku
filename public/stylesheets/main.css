@@ -74,7 +74,18 @@ nome-principal {
 	background-color: #7A67EE;
 	float: center;
 	height: 240px;
-	width: 250px;
+	width: 300px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	padding-top: 2px;
+}
+
+.cadastrar{
+	background-color: #7A67EE;
+	float: center;
+	height: 400px;
+	width: 300px;
 	margin-left: 10px;
 	margin-top: 10px;
 	border-radius: 10px;

@@ -8,16 +8,10 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	private static Sistema sistema ;
+	private static Sistema sistema = new Sistema();
 	
 	public static Result index() {
-		try {
-			sistema = new Sistema();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return meuPlano("","0");
+    	return start();  
     }
 	
 	public static Result meuPlano(String ID, String period){
@@ -31,13 +25,16 @@ public class Application extends Controller {
 	}
 	
 	public static Result login(String email, String password){
+		Result retorno = null;
 		Auxiliar aux = new Auxiliar();
 		try {
 			sistema.login(email, password);
-	   		return ok(index.render(sistema, aux));
+	   		retorno = ok(index.render(sistema, aux));
+
 		} catch(Exception e){
-			return notFound(":'( - "+e.getMessage());
+			retorno = notFound(":'( - "+e.getMessage());
 		}
+		return retorno;
 	}
 	
 	public static Result mover(String ID, String fromPeriod, String actualPeriod){
@@ -57,5 +54,12 @@ public class Application extends Controller {
 		return ok(login.render(sistema, aux));
 	}
 	
-
+	public static Result newUser(){
+		return ok(cadastrar.render());
+	}
+	
+	public static Result cadastradar(String name, String email, String password){
+		sistema.createUser(email, password, name);
+		return start();
+	}
 }

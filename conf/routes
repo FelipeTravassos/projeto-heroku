@@ -4,6 +4,8 @@
 
 # Home page
 GET     /		                    			controllers.Application.start()
+GET     /newUser                    			controllers.Application.newUser()
+GET     /cadastrar/:name/:email/:password		controllers.Application.cadastradar(name:String, email:String, password:String)
 GET     /index	                    			controllers.Application.index()
 GET     /meuPlano/:ID/:period       			controllers.Application.meuPlano(ID:String, period:String)
 GET     /login/:email/:password       			controllers.Application.login(email:String, password:String)

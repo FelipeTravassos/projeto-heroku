@@ -1,2 +1,7 @@
 admin@email.com	admin	admin	files//plan-admin@email.com.txt
 felipe.travassos@ccc.ufcg.edu.br	1234	Felipe	files//plan-felipe.travassos@ccc.ufcg.edu.br.txt
+eu@eu.com	eu	eu	files//plan-eu@eu.com.txt
+eu	eu	eu	files//plan-eu.txt
+tu	tu	tu	files//plan-tu.txt
+ei	ei	ei	files//plan-ei.txt
+joao@joao.com	1234	joao	files//plan-joao@joao.com.txt
