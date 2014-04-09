@@ -5,3 +5,4 @@ eu	eu	eu	files//plan-eu.txt
 tu	tu	tu	files//plan-tu.txt
 ei	ei	ei	files//plan-ei.txt
 joao@joao.com	1234	joao	files//plan-joao@joao.com.txt
+test	test	test	files//plan-test.txt

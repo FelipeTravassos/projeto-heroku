@@ -55,7 +55,7 @@ public class Application extends Controller {
 	}
 	
 	public static Result newUser(){
-		return ok(cadastrar.render());
+		return ok(cadastrar.render(sistema));
 	}
 	
 	public static Result cadastradar(String name, String email, String password){

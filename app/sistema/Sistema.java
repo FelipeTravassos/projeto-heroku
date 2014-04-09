@@ -23,9 +23,10 @@ public class Sistema {
 		return false;
 	}
 	
-	public void login(String email, String password) {
+	public void login(String email, String password) throws Exception{
 		user = login.login(email, password);
 		if(user == null){
+			throw new Exception("Usuário não cadastrado, verifique a senha e o email digitado");
 		}
 		plan = user.getPlano();
 	}
